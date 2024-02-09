@@ -1,0 +1,12 @@
+{
+  "name": "scr",
+  "version": "1.0.0",
+  "main": "script.js",
+  "module": "module",
+  "scripts": {
+    "start": "node --experimental-modules script.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
