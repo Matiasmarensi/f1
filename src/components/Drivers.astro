@@ -1,0 +1,24 @@
+---
+import { type Drivers } from "../types/types";
+
+const res = await fetch("https://api.openf1.org/v1/drivers?session_key=latest", {
+  method: "GET",
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
+const drivers = (await res.json()) as Drivers[];
+console.log(drivers);
+---
+
+<div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-2 p-4">
+  {
+    drivers.map((driver) => (
+      <div>
+        <h2 class="text-zinc-200">{driver.full_name}</h2>
+        <h3 class="text-zinc-200">{driver.team_name}</h3>
+      </div>
+      // Renderiza la propiedad específica del objeto
+    ))
+  }
+</div>
