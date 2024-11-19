@@ -1,49 +1,31 @@
-<!-- ---
-interface Props {
-  fullName: string;
+---
+export interface Driver {
+  full_name: string;
+  team_name: string;
+  country_code: string;
+  headshot_url: string | null;
+  driver_number: number;
+  team_colour: string;
 }
 
-const { fullname } = Astro.props;
+const { team_name, team_colour, country_code, driver_number, headshot_url, full_name } = Astro.props;
 ---
 
-<li></li>
-<style>
-  .link-card {
-    list-style: none;
-    display: flex;
-    padding: 1px;
-    background-color: #23262d;
-    background-image: none;
-    background-size: 400%;
-    border-radius: 7px;
-    background-position: 100%;
-    transition: background-position 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
-  }
-  .link-card > a {
-    width: 100%;
-    text-decoration: none;
-    line-height: 1.4;
-    padding: calc(1.5rem - 1px);
-    border-radius: 8px;
-    color: white;
-    background-color: #23262d;
-    opacity: 0.8;
-  }
-  h2 {
-    margin: 0;
-    font-size: 1.25rem;
-    transition: color 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-  p {
-    margin-top: 0.5rem;
-    margin-bottom: 0;
-  }
-  .link-card:is(:hover, :focus-within) {
-    background-position: 0;
-    background-image: var(--accent-gradient);
-  }
-  .link-card:is(:hover, :focus-within) h2 {
-    color: rgb(var(--accent-light));
-  }
-</style> -->
+<div
+  class="flex flex-col items-center bg-gray-800 p-4 rounded-lg shadow-lg"
+  style={`border-top: 4px solid #${team_colour}`}
+>
+  <div class="w-24 h-24 overflow-hidden rounded-full mb-4">
+    <img
+      src={headshot_url || "https://via.placeholder.com/150"}
+      alt={`${full_name} headshot`}
+      class="w-full h-full object-cover"
+    />
+  </div>
+  <h2 class="text-lg font-semibold text-zinc-100 text-center">{full_name}</h2>
+  <h3 class="text-md text-zinc-400 text-center">{team_name}</h3>
+  <p class="text-sm text-zinc-500 text-center">{country_code}</p>
+  <span class="mt-2 text-sm font-bold text-white bg-zinc-700 px-2 py-1 rounded-full">
+    #{driver_number}
+  </span>
+</div>

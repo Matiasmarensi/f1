@@ -1,5 +1,6 @@
 ---
 import { type Drivers } from "../types/types";
+import Card from "./Card.astro";
 
 const res = await fetch("https://api.openf1.org/v1/drivers?session_key=latest", {
   method: "GET",
@@ -8,17 +9,19 @@ const res = await fetch("https://api.openf1.org/v1/drivers?session_key=latest", 
   },
 });
 const drivers = (await res.json()) as Drivers[];
-console.log(drivers);
 ---
 
-<div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-2 p-4">
+<div class="grid gap-4 sm:grid-cols-4 lg:grid-cols-2 p-4">
   {
     drivers.map((driver) => (
-      <div>
-        <h2 class="text-zinc-200">{driver.full_name}</h2>
-        <h3 class="text-zinc-200">{driver.team_name}</h3>
-      </div>
-      // Renderiza la propiedad específica del objeto
+      <Card
+        full_name={driver.full_name}
+        team_name={driver.team_name}
+        country_code={driver.country_code}
+        headshot_url={driver.headshot_url}
+        driver_number={driver.driver_number}
+        team_colour={driver.team_colour}
+      />
     ))
   }
 </div>
